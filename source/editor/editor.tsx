@@ -15,7 +15,8 @@ export const Editor: React.FC = () => {
 
     const onClick = () => {
         const encoded = encode({ language: 'plain text', code: state })
-        const link = `${window.location.origin}/#/s/${encoded}`
+        const { origin, pathname } = window.location
+        const link = `${origin}${pathname}#/s/${encoded}`
         window.navigator.clipboard.writeText(link)
     }
 
