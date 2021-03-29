@@ -2,11 +2,11 @@ import { Button } from '@chakra-ui/button'
 import { Box } from '@chakra-ui/layout'
 import React, { useEffect, useState } from 'react'
 import { ReactCodeJar } from 'react-codejar'
-import { useSelector } from 'react-redux'
+import { useSnippetStore } from '../stores/useSnippetStore'
 import { encode } from '../utilities/conversion'
 
 export const Editor: React.FC = () => {
-    const initialState = useSelector((state: any) => state.snippet.code)
+    const initialState = useSnippetStore((state) => state.code)
     const [state, setState] = useState(initialState)
 
     useEffect(() => {
