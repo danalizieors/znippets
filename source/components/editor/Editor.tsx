@@ -1,17 +1,13 @@
 import { Button } from '@chakra-ui/button'
 import { Box } from '@chakra-ui/layout'
-import React, { useEffect, useState } from 'react'
-import { ReactCodeJar } from 'react-codejar'
-import { useSnippetStore } from '../stores/useSnippetStore'
-import { encode } from '../utilities/conversion'
+import Monaco from '@monaco-editor/react'
+import React, { useState } from 'react'
+import { useSnippetStore } from '../../stores/useSnippetStore'
+import { encode } from '../../utilities/conversion'
 
 export const Editor: React.FC = () => {
     const initialState = useSnippetStore((state) => state.code)
     const [state, setState] = useState(initialState)
-
-    useEffect(() => {
-        setState(initialState)
-    }, [initialState])
 
     const onClick = () => {
         const encoded = encode({ language: 'plain text', code: state })
@@ -22,14 +18,13 @@ export const Editor: React.FC = () => {
 
     return (
         <Box position='fixed' height='full' width='full'>
-            <ReactCodeJar
-                code={state}
-                onUpdate={setState}
-                highlight={(state) => state}
-                style={{}}
-            >
-                {state}
-            </ReactCodeJar>
+            <Monaco
+                height='90vh'
+                defaultLanguage='typescript'
+                defaultValue={initialState}
+                theme='vs-dark'
+                onChange={(value) => setState(value || '')}
+            ></Monaco>
             <Button onClick={onClick}>copy to clipboard</Button>
         </Box>
     )
