@@ -1,7 +1,7 @@
 import create from 'zustand'
 
 const state = {
-    language: 'plain text',
+    language: 'typescript',
     code: '',
 }
 
