@@ -1,15 +1,11 @@
 import { Button } from '@chakra-ui/button'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSnippetStore } from '../stores/useSnippetStore'
 import { encode } from '../utilities/conversion'
 
 export const CopyButton: React.FC = () => {
     const { language, code } = useSnippetStore()
     const [copied, setCopied] = useState(false)
-
-    useEffect(() => {
-        setCopied(false)
-    }, [language, code])
 
     const onClick = () => {
         const encoded = encode({ language, code })
@@ -20,11 +16,14 @@ export const CopyButton: React.FC = () => {
         setCopied(true)
     }
 
+    const onBlur = () => {
+        setCopied(false)
+    }
+
     const text = copied ? 'Copied!' : 'Copy to clipboard!'
 
     return (
-        <Button width='full' onClick={onClick}>
-            {' '}
+        <Button width='full' onClick={onClick} onBlur={onBlur}>
             {text}
         </Button>
     )
