@@ -26,6 +26,7 @@
         "@emotion/styled": "^11.1.5",
         "@monaco-editor/react": "^4.1.0",
         "fflate": "^0.6.9",
+        "focus-visible": "^5.2.0",
         "framer-motion": "^3.10.5",
         "js-base64": "^3.6.0",
         "monaco-themes": "^0.3.3",
