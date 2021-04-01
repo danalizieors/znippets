@@ -1,6 +1,6 @@
 {
     "name": "znippets",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Compress code snippets into shareable links",
     "repository": "git@github.com:danalizieors/znippets.git",
     "author": "Danalizi-Erőss Örs <danalizieors@gmail.com>",
