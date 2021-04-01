@@ -1,5 +1,6 @@
 import { indexBy, prop } from 'ramda'
 import create from 'zustand'
+import { combine } from 'zustand/middleware'
 
 export type Language = {
     id: string
@@ -10,13 +11,14 @@ export type Language = {
 type State = {
     languages: Record<string, Language>
 }
-type Actions = {
-    setLanguages: (languages: Language[]) => void
-}
-type Store = State & Actions
 
-export const useLanguageStore = create<Store>((set) => ({
+const state: State = {
     languages: {},
-    setLanguages: (languages) =>
-        set({ languages: indexBy(prop('id'), languages) }),
-}))
+}
+
+export const useLanguageStore = create(
+    combine(state, (set) => ({
+        set: (languages: Language[]) =>
+            set({ languages: indexBy(prop('id'), languages) }),
+    })),
+)

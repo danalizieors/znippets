@@ -1,19 +1,18 @@
 import create from 'zustand'
+import { combine } from 'zustand/middleware'
 
 const state = {
     language: 'typescript',
     code: '',
 }
 
-type State = typeof state
-type Actions = {
-    set: (state: State) => void
-    reset: () => void
-}
-type Store = State & Actions
+export type Snippet = typeof state
 
-export const useSnippetStore = create<Store>((set) => ({
-    ...state,
-    set: (state) => set(state),
-    reset: () => set(state),
-}))
+export const useSnippetStore = create(
+    combine(state, (set) => ({
+        set: (snippet: Snippet) => set(snippet),
+        setLanguage: (language: string) => set({ language }),
+        setCode: (code: string) => set({ code }),
+        reset: () => set(state),
+    })),
+)
